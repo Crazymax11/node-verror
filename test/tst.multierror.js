@@ -60,27 +60,27 @@ function main()
 	/* errorFromList */
 	mod_assert.throws(function () {
 		console.error(errorFromList());
-	}, /^AssertionError: errors \(\[object\]\) is required$/);
+	}, /AssertionError: errors \(\[object\]\) is required/);
 
 	mod_assert.throws(function () {
 		console.error(errorFromList(null));
-	}, /^AssertionError: errors \(\[object\]\) is required$/);
+	}, /AssertionError: errors \(\[object\]\) is required/);
 
 	mod_assert.throws(function () {
 		console.error(errorFromList({}));
-	}, /^AssertionError: errors \(\[object\]\) is required$/);
+	}, /AssertionError: errors \(\[object\]\) is required/);
 
 	mod_assert.throws(function () {
 		console.error(errorFromList('asdf'));
-	}, /^AssertionError: errors \(\[object\]\) is required$/);
+	}, /AssertionError: errors \(\[object\]\) is required/);
 
 	mod_assert.throws(function () {
 		console.error(errorFromList([ new Error(), 17 ]));
-	}, /^AssertionError: errors \(\[object\]\) is required$/);
+	}, /AssertionError: errors \(\[object\]\) is required/);
 
 	mod_assert.throws(function () {
 		console.error(errorFromList([ new Error(), {} ]));
-	}, /^AssertionError/);
+	}, /AssertionError/);
 
 	mod_assert.strictEqual(null, errorFromList([]));
 	mod_assert.ok(err1 == errorFromList([ err1 ]));
