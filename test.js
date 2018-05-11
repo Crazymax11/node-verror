@@ -1,5 +1,5 @@
 const { expect } = require('chai');
-const VError = require('../lib/verror.js');
+const VError = require('./index.js');
 
 describe('VError', () => {
     describe('#Constructor', () => {
@@ -19,7 +19,7 @@ describe('VError', () => {
         })
         it('should create error with message from message and error', () => {
             const err = new VError('Test message', new Error('Another error'));
-            expect(err.message).to.be.equal('Test message: Another error');
+            expect(err.message).to.be.equal('Test message');
         });
         it('should create error where cause is error', () => {
             const cause = new Error('Another error');
@@ -51,16 +51,16 @@ describe('VError', () => {
             expect(fullstack).to.include('Caused by: VError: VError');
         })
     })
-    describe('#Inherites', () => {
-        it('dd', () => {
+    describe('#Inheritance', () => {
+        it('created errors should be instance of their parents', () => {
             const err = new VError('err1');
-            class MyError extends VError {
-            }
-            const err2 = new MyError('err2');
-            class MyError2 extends MyError{
+            class MyError extends VError {}
 
-            }
-            const err3 = new MyError2('err2', err2);
+            const err2 = new MyError('err2');
+            class MyError2 extends MyError{}
+
+            const err3 = new MyError2('err3', err2);
+
             expect(err3).to.be.instanceof(MyError2)
             expect(err3).to.be.instanceof(MyError)
             expect(err3).to.be.instanceof(VError)
@@ -70,13 +70,9 @@ describe('VError', () => {
             expect(err2).to.be.instanceof(VError)
             expect(err2).to.be.instanceof(Error)
 
-            console.log(VError.fullStack(err3));
+            const stack = VError.fullStack(err3);
+            expect(stack).to.include('MyError2: err3')
+            expect(stack).to.include('Caused by: MyError: err2')
         })
-    })
-    describe('#cause', () => {
-        
-    })
-    describe('#findCauseByName', () => {
-
     })
 });
