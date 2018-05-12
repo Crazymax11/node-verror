@@ -1,5 +1,9 @@
 'use strict';
 
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -33,24 +37,24 @@ function _extendableBuiltin(cls) {
   return ExtendableBuiltin;
 }
 
-var VError = function (_extendableBuiltin2) {
-  _inherits(VError, _extendableBuiltin2);
+var ChainableError = function (_extendableBuiltin2) {
+  _inherits(ChainableError, _extendableBuiltin2);
 
-  function VError() {
-    var message = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 'VError';
+  function ChainableError() {
+    var message = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 'ChainableError';
 
     var _ret;
 
     var err = arguments[1];
 
-    _classCallCheck(this, VError);
+    _classCallCheck(this, ChainableError);
 
-    var _this = _possibleConstructorReturn(this, (VError.__proto__ || Object.getPrototypeOf(VError)).call(this, message));
+    var _this = _possibleConstructorReturn(this, (ChainableError.__proto__ || Object.getPrototypeOf(ChainableError)).call(this, message));
 
     _this.name = _this.constructor.name;
     if (err) {
       if (!(err instanceof Error)) {
-        throw new Error('Provided error to VError constructor is not Error');
+        throw new Error('Provided error to ChainableError constructor is not Error');
       }
 
       _this.jse_cause = err;
@@ -65,13 +69,13 @@ var VError = function (_extendableBuiltin2) {
     return _ret = _this, _possibleConstructorReturn(_this, _ret);
   }
 
-  _createClass(VError, [{
+  _createClass(ChainableError, [{
     key: 'fullStack',
     value: function fullStack() {
       var cause = this.jse_cause;
 
       if (cause) {
-        var causeStack = cause instanceof VError ? cause.fullStack() : cause.stack;
+        var causeStack = cause instanceof ChainableError ? cause.fullStack() : cause.stack;
         return this.stack + '\nCaused by: ' + causeStack;
       }
 
@@ -85,7 +89,7 @@ var VError = function (_extendableBuiltin2) {
     }
   }]);
 
-  return VError;
+  return ChainableError;
 }(_extendableBuiltin(Error));
 
-module.exports = VError;
+exports.default = ChainableError;
