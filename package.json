@@ -2,7 +2,7 @@
 	"name": "chainable-error",
 	"version": "1.0.0",
 	"description": "Error chain like in Java world",
-	"main": "index.js",
+	"main": "dist.js",
 	"repository": {
 		"type": "git",
 		"url": "git://github.com/Crazymax11/chainable-error.git"
